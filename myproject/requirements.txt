@@ -1,0 +1,46 @@
+pip freeze > requirements.txt
+```
+
+Your `requirements.txt` should look similar to:
+```
+Django>=4.2,<5.0
+gunicorn==21.2.0
+whitenoise==6.6.0
+psycopg2-binary==2.9.9
+python-decouple==3.8
+dj-database-url==2.1.0
+```
+
+### Step 5: Create a Procfile
+
+Create a file named `Procfile` (no extension) in your project root:
+```
+web: gunicorn myproject.wsgi --log-file -
+```
+
+Replace `myproject` with your actual project name.
+
+### Step 6: Create a .env.example File
+
+Create `.env.example` to document required environment variables:
+```
+SECRET_KEY=your-secret-key-here
+DEBUG=False
+ALLOWED_HOSTS=yourdomain.com,www.yourdomain.com
+DATABASE_URL=postgres://user:password@host:port/database
+SECURE_SSL_REDIRECT=True
+SESSION_COOKIE_SECURE=True
+CSRF_COOKIE_SECURE=True
+```
+
+### Step 7: Update .gitignore
+
+Ensure your `.gitignore` includes:
+```
+*.pyc
+__pycache__/
+db.sqlite3
+.env
+staticfiles/
+mediafiles/
+*.log
